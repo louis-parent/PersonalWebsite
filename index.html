@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Louis Parent</title>
+		<link rel="shortcut icon" type="image/png" href="jelly.png"/>
+		<meta charset="utf-8" />
+		
+		<link rel="stylesheet" href="glassify/glassify.css" />
+		<link rel="stylesheet" href="jos/jos.css" />
+		
+		<script src="jos/Utils.js"></script>
+		<script src="jos/jOS.js"></script>
+		<script src="jos/Dock.js"></script>
+		<script src="jos/Window.js"></script>
+		
+		<style>
+			:root
+			{
+				--dock-background: var(--glass-background);
+				--dock-border-color: var(--glass-border);
+				--dock-border-radius: var(--glass-radius);
+				
+				--window-background: var(--glass-background);
+				--window-border-color: var(--glass-border);
+				--window-border-radius: var(--glass-radius);
+				
+				--window-title-background: var(--glass-background);
+				--window-title-border-color: var(--glass-border);
+			
+				--primary-color: #9555ee;
+			}
+			
+			.primary-text
+			{
+				color: var(--primary-color);
+			}
+			
+			h1, h2, h3, h4
+			{
+				font-weight: normal;
+			}
+			
+			h1
+			{
+				text-align: center;
+			}
+		</style>
+		
+		<script defer>
+			function createHTMLNode(html)
+			{
+				let node = document.createElement("span");
+				node.innerHTML = html;
+				return node;
+			}			
+			
+			window.addEventListener("load", () => {
+				let bodySize = document.body.getBoundingClientRect();
+			
+				let presentation = document.querySelector("#presentation");
+				presentation.remove();
+			
+				new jOS({
+					windows: [new Window({
+						icon: "jelly.png",
+						title: "A Propos",
+						content: presentation,
+						maximizable: false,
+						resizable: false,
+						classes: ["glass"],
+						x: (bodySize.width / 2) - (bodySize.width / 6),
+						y: (bodySize.height / 2) - (bodySize.height / 6),
+						width: bodySize.width / 3,
+						height: bodySize.height / 3
+					})]
+				});
+			});
+		</script>
+	</head>
+	<body style="background: url(https://cdn.dribbble.com/users/1040798/screenshots/15632395/media/da6d306e34b453b1198f069a725fc91d.png); background-size: cover; width: 100vw; height: 100vh;">
+		<main id="presentation" style="width: 100%; height: 100%; display: flex; margin: auto;">
+			<h1>
+				Bonjour, je suis <span class="primary-text">Louis Parent.</span><br/>
+				J'étudie la conception et le développement. 
+			</h1>
+		</main>
+	</body>
+</html>

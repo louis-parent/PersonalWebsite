@@ -1,0 +1,301 @@
+:root
+{
+	--dock-background: white;
+	
+	--dock-border-width: 1px;
+	--dock-border-style: solid;
+	--dock-border-color: #212121;
+	--dock-border-radius: 0px;
+	
+	--dock-offset: 0.5em;
+	
+	--dock-launcher-spacing: 0.5em;
+	
+	
+	--window-padding: 4px;
+	
+	--window-background: white;
+	
+	--window-border-width: 1px;
+	--window-border-style: solid;
+	--window-border-color: #212121;
+	--window-border-radius: 0px;
+
+	--window-title-height: 32px;
+	--window-title-font-size: 0.9em;
+	
+	--window-title-color: #000000;
+	
+	--window-title-background: #484848;
+	
+	--window-title-border-width: 1px;
+	--window-title-border-style: solid;
+	--window-title-border-color: #212121;
+
+	--window-action-color: #000000;
+
+	--window-maximize-background: #00FF00;
+	--window-minimize-background: #FFFF00;
+	--window-close-background: #FF0000;
+	
+	--window-maximize-border-width: 0px;
+	--window-maximize-border-style: solid;
+	--window-maximize-border-color: transparent;
+	
+	--window-minimize-border-width: 0px;
+	--window-minimize-border-style: solid;
+	--window-minimize-border-color: transparent;
+	
+	--window-close-border-width: 0px;
+	--window-close-border-style: solid;
+	--window-close-border-color: transparent;
+	
+	--window-resizer-background: #484848;
+	
+	--dock-launcher-ship-size: 0.33em;
+	--dock-launcher-ship-color: white;
+}
+
+.jos-disable
+{
+	display: none !important;
+}
+
+.jos-root
+{
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+
+	position: relative;
+}
+
+.jos-dock
+{
+	position: absolute;
+	
+	height: 7%;
+	
+	display: flex;
+	align-items: center;
+	
+	user-select: none;
+	
+	margin: var(--dock-offset);
+	
+	background: var(--dock-background);
+	
+	border-width: var(--dock-border-width);
+	border-style: var(--dock-border-style);
+	border-color: var(--dock-border-color);
+	border-radius: var(--dock-border-radius);
+}
+
+.jos-launcher
+{
+	height: calc(100% - 1em);
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	
+	cursor: pointer;
+	
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-left: 0.5em;
+}
+
+.jos-launcher:last-child
+{
+	margin-right: 0.5em;
+}
+
+.jos-launcher-icon
+{
+	transition: transform ease-out 0.5s;
+	transform-origin: bottom;
+	
+	height: 85%;
+}
+
+.jos-launcher:hover .jos-launcher-icon
+{
+	transform: scale(1.5);
+}
+
+.jos-launcher-ships
+{
+	height: 5%;
+	width: 100%;
+	
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.jos-launcher-ships > .jos-launcher-ship
+{
+	height: var(--dock-launcher-ship-size);
+	width: var(--dock-launcher-ship-size);
+	
+	border-radius: 50%;
+	background: var(--dock-launcher-ship-color);
+	box-shadow: var(--dock-launcher-ship-color) 0 0 calc(var(--dock-launcher-ship-size));
+}
+
+.jos-window
+{
+	position: absolute;
+	
+	top: 0;
+	left: 0;
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	
+	min-width: 16em;
+	min-height: calc(var(--window-title-height) + (var(--window-padding) * 4) + 2em);
+	
+	background: var(--window-background);
+	
+	border-width: var(--window-border-width);
+	border-style: var(--window-border-style);
+	border-color: var(--window-border-color);
+	border-radius: var(--window-border-radius);
+}
+
+.jos-window.jos-fullscreen
+{
+	transform: translate(0px, 0px) !important;
+	width: calc(100% - var(--window-border-width) * 2) !important;
+	height: calc(100% - var(--window-border-width) * 2) !important;
+}
+
+.jos-window-title
+{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	
+	padding: var(--window-padding);
+	
+	width: calc(100% - var(--window-padding) * 2);
+	height: var(--window-title-height);
+	
+	color: var(--window-title-color);
+	
+	background: var(--window-title-background);
+	
+	border-width: var(--window-title-border-width);
+	border-style: var(--window-title-border-style);
+	border-color: var(--window-title-border-color);
+	border-top-left-radius: var(--window-border-radius);
+	border-top-right-radius: var(--window-border-radius);
+	
+	cursor: grab;
+	
+	user-select: none;
+	user-drag: none;
+}
+
+.jos-window-title *
+{
+	max-height: var(--window-title-height);
+	user-select: none;
+	user-drag: none;
+}
+
+.jos-window-title-name, .jos-window-title-actions
+{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.jos-window-title-name > *, .jos-window-title-actions > *
+{
+	margin: 0 var(--window-padding);
+}
+
+.jos-window-maximize, .jos-window-minimize, .jos-window-close
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	font-size: var(--window-title-font-size);
+	
+	width: 2em;
+	height: 2em;
+	
+	color: var(--window-action-color);
+	
+	border-radius: 50%;
+	
+	cursor: pointer;
+}
+
+.jos-window-maximize
+{
+	background: var(--window-maximize-background);
+	
+	border-width: var(--window-maximize-border-width);
+	border-style: var(--window-maximize-border-style);
+	border-color: var(--window-maximize-border-color);
+}
+
+.jos-window-minimize
+{
+	background: var(--window-minimize-background);
+	
+	border-width: var(--window-minimize-border-width);
+	border-style: var(--window-minimize-border-style);
+	border-color: var(--window-minimize-border-color);
+}
+
+.jos-window-close
+{
+	background: var(--window-close-background);
+	
+	border-width: var(--window-close-border-width);
+	border-style: var(--window-close-border-style);
+	border-color: var(--window-close-border-color);
+}
+
+.jos-window-body
+{
+	padding: calc(var(--window-padding) * 2);
+	
+	width: calc(100% - var(--window-padding) * 4);
+	height: 100%;
+	
+	overflow: auto;
+}
+
+.jos-window-resizer
+{
+	position: absolute;
+	
+	right: 0;
+	bottom: 0;
+	
+	cursor: nwse-resize;
+	
+	width: calc(var(--window-border-radius) * 2);
+	height: calc(var(--window-border-radius) * 2);
+	
+	background: var(--window-resizer-background);
+	clip-path: polygon(100% 0, 100% 100%, 0 100%);
+	
+	border-bottom-right-radius: var(--window-border-radius);
+	
+	user-select: none;
+	user-drag: none;
+}
