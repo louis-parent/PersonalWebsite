@@ -16,6 +16,14 @@ class jOS extends Listenable
 	{
 		this.root.classList.add("jos-root");
 		
+		if(options?.background)
+		{
+			this.root.style.background = "url(" + options?.background + ")";
+			this.root.style.backgroundSize = "cover";
+			this.root.style.backgroundRepeat = "no-repeat";
+			this.root.style.backgroundPosition = "center center";
+		}
+		
 		for(let c of (options?.classes || new Array()))
 		{
 			this.root.classList.add(c);
