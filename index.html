@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="style/glassify.css" />
 		<link rel="stylesheet" href="jos/jos.css" />
 		
+		<script src="script/GithubRepoFetcher.js"></script>
 		<script src="jos/Utils.js"></script>
 		<script src="jos/jOS.js"></script>
 		<script src="jos/Dock.js"></script>
@@ -63,24 +64,52 @@
 				height: 1.25em;
 				margin-left: 0.5em;
 			}
+			
+			.repos-list .title
+			{
+				margin-bottom: 0.1em;
+			}
+			
+			.repos-list .link
+			{
+				text-decoration: none;			
+			}
 		</style>
 		
 		<script defer>
-			function createHTMLNode(html)
+			function fillRepos()
 			{
-				let node = document.createElement("span");
-				node.innerHTML = html;
-				return node;
+				new GithubRepoFetcher("louis-parent").fetch({
+					filter: "owned",
+					sort: "new-first"
+				}).then(repositories => {
+					const container = document.querySelector("#repos");
+					const toDuplicate = container.querySelector("#blank-repo");
+					toDuplicate.remove();
+			
+					for(let repository of repositories)
+					{
+						toDuplicate.querySelector(".link").href = repository.href;
+						toDuplicate.querySelector(".title").innerText = repository.name;
+						toDuplicate.querySelector(".description").innerText = repository.description;
+						container.appendChild(toDuplicate.cloneNode(true));
+					}
+				});
 			}			
 			
 			window.addEventListener("load", () => {
-				let bodySize = document.body.getBoundingClientRect();
+				this.fillRepos();
 			
-				let presentation = document.querySelector("#presentation");
+				const bodySize = document.body.getBoundingClientRect();
+			
+				const presentation = document.querySelector("#presentation");
 				presentation.remove();
 			
-				let contact = document.querySelector("#contact");
+				const contact = document.querySelector("#contact");
 				contact.remove();
+			
+				const repos = document.querySelector("#repos");
+				repos.remove();
 			
 				new jOS({
 					windows: [new Window({
@@ -104,6 +133,16 @@
 						y: bodySize.bottom - (bodySize.width / 8) - (bodySize.width * 0.025),
 						width: (bodySize.width / 5),
 						height: (bodySize.width / 8)
+					}), new Window({
+						icon: "assets/toolbox.png",
+						title: "Projets",
+						content: repos,
+						maximizable: true,
+						classes: ["glass"],
+						x: bodySize.width * 0.025,
+						y: bodySize.width * 0.025,
+						width: (bodySize.width / 3) - (bodySize.width * 0.05),
+						height: bodySize.height - (bodySize.width * 0.05),
 					})]
 				});
 			});
@@ -138,6 +177,13 @@
 					<a href="https://www.linkedin.com/in/louis-parent/">louis-parent</a>
 				</li>
 			</ul>
-		</aside>	
+		</aside>
+		
+		<section id="repos" class="repos-list">
+			<div id="blank-repo">
+				<a class="link"><h2 class="title"></h2></a>
+				<span class="description"></span>
+			</div>
+		</section>
 	</body>
 </html>
