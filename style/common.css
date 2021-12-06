@@ -1,0 +1,89 @@
+body
+{
+	width: 100vw;
+	height: 100vh;
+}
+
+a, .primary-text
+{
+	color: var(--primary-color);
+}
+
+h1, h2, h3, h4
+{
+	font-weight: normal;
+}
+
+h1
+{
+	text-align: center;
+}
+
+.contact-list
+{
+	list-style-type: none;
+	padding-left: 5%;
+}
+
+.contact-list > li
+{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.contact-list > li > img
+{
+	height: 1.25em;
+	margin-left: 0.5em;
+}
+
+.repos-list .title
+{
+	margin-bottom: 0.1em;
+}
+
+.repos-list .link
+{
+	text-decoration: none;			
+}
+
+.bar
+{
+	--chart-value: 0;
+	--chart-color: rgba(149, 85, 238, 0.5);
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	white-space: nowrap;
+}
+
+.bar > :first-child
+{			
+	width: 100px;
+}
+
+.bar:after
+{
+	content: "";
+
+	height: 1.5em;
+	width: calc(var(--chart-value) * calc(var(--chart-size) / 100));
+	
+	background: var(--chart-color);
+
+	margin-left: 0.5em;
+	border-radius: 1em;
+}
+
+#stats
+{
+	--chart-size: 256px !important;
+}
+
+#stats > .bar
+{
+	margin-bottom: 0.5em;
+}
