@@ -193,8 +193,12 @@ class Launcher extends Listenable
 		}
 		else
 		{
-			this.window.minimize(false);
-			this.window.bringToFront();
+			this.window.minimize();
+			
+			if(!this.window.isMinimized())
+			{
+				this.window.bringToFront();
+			}
 		}
 	}
 }

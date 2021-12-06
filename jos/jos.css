@@ -169,6 +169,11 @@
 	border-style: var(--window-border-style);
 	border-color: var(--window-border-color);
 	border-radius: var(--window-border-radius);
+	
+	visibility: visible;
+	opacity: 1;
+	
+	transition: visibility 0.12s ease, opacity 0.12s ease; 
 }
 
 .jos-window.jos-fullscreen
@@ -181,6 +186,7 @@
 .jos-window.jos-minimized
 {
 	visibility: hidden;
+	opacity: 0;
 }
 
 .jos-window-title
