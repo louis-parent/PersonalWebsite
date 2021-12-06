@@ -74,6 +74,10 @@ class Window extends Listenable
 		this.title.addEventListener("maximize", () => {
 			this.maximize();
 		});
+		
+		this.title.addEventListener("minimize", () => {
+			this.minimize();
+		});
 
 		this.content = new WindowContent(options);
 		this.element.appendChild(this.content.getElement());
@@ -197,20 +201,36 @@ class Window extends Listenable
 		});
 		this.os.getRoot().appendChild(this.getElement());
 	}
-	
-	maximize(force)
+		
+	minimize(force)
 	{
-		if(force === undefined)
+		if(force === true)
 		{
-			this.getElement().classList.toggle("jos-fullscreen");
+			this.getElement().classList.add("jos-minimized");
 		}
-		else if(force === true)
+		else if(force === false)
 		{
-			this.getElement().classList.add("jos-fullscreen");
+			this.getElement().classList.remove("jos-minimized");
 		}
 		else
 		{
+			this.getElement().classList.toggle("jos-minimized");			
+		}
+	}
+	
+	maximize(force)
+	{
+		if(force === true)
+		{
+			this.getElement().classList.add("jos-fullscreen");
+		}
+		else if(force === false)
+		{
 			this.getElement().classList.remove("jos-fullscreen");
+		}
+		else
+		{
+			this.getElement().classList.toggle("jos-fullscreen");		
 		}
 	}
 	
@@ -312,6 +332,11 @@ class Window extends Listenable
 	isMaximized()
 	{
 		return this.getElement().classList.contains("jos-fullscreen");
+	}
+	
+	isMinimized()
+	{
+		return this.getElement().classList.contains("jos-minimized");
 	}
 	
 	isResizable()

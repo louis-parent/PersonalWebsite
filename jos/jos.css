@@ -176,6 +176,11 @@
 	height: calc(100% - var(--window-border-width) * 2) !important;
 }
 
+.jos-window.jos-minimized
+{
+	visibility: hidden;
+}
+
 .jos-window-title
 {
 	display: flex;

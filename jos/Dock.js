@@ -160,14 +160,7 @@ class Launcher extends Listenable
 		this.element.appendChild(this.shipRack);
 		
 		this.element.addEventListener("click", event => {
-			if(this.window.isClosed())
-			{
-				this.window.open();
-			}
-			else
-			{
-				this.window.bringToFront();
-			}
+			this.click(event);
 		});
 	}
 		
@@ -190,6 +183,19 @@ class Launcher extends Listenable
 	{
 		let ship = this.ships.pop();
 		this.shipRack.removeChild(ship.getElement());
+	}
+	
+	click(event) 
+	{
+		if(this.window.isClosed())
+		{
+			this.window.open();
+		}
+		else
+		{
+			this.window.minimize(false);
+			this.window.bringToFront();
+		}
 	}
 }
 
