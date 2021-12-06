@@ -579,7 +579,7 @@ class WindowTitle extends Listenable
 		
 		this.close = document.createElement("span");
 		this.close.classList.add("jos-window-close");
-		this.close.innerText = "X";
+		this.close.innerText = "🞩";
 		this.close.addEventListener("click", () => {
 			this.emitEvent("close");
 		});
