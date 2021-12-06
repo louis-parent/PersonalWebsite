@@ -80,6 +80,46 @@
 			{
 				text-decoration: none;			
 			}
+			
+			.bar
+			{
+				--chart-value: 0;
+				--chart-color: rgba(149, 85, 238, 0.5);
+			
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+			
+				white-space: nowrap;
+			}
+			
+			.bar > :first-child
+			{			
+				width: 100px;
+			}
+			
+			.bar:after
+			{
+				content: "";
+			
+				height: 1.5em;
+				width: calc(var(--chart-value) * calc(var(--chart-size) / 100));
+				
+				background: var(--chart-color);
+			
+				margin-left: 0.5em;
+				border-radius: 1em;
+			}
+			
+			#stats
+			{
+				--chart-size: 256px !important;
+			}
+			
+			#stats > .bar
+			{
+				margin-bottom: 0.5em;
+			}
 		</style>
 		
 		<script defer>
@@ -101,28 +141,24 @@
 						container.appendChild(toDuplicate.cloneNode(true));
 					}
 				});
-			}			
+			}
+			
+			function getDetachedNodeById(id) {
+				const node = document.querySelector("#" + id);
+				node.remove();
+				return node;
+			}	
 			
 			window.addEventListener("load", () => {
 				this.fillRepos();
-			
 				const bodySize = document.body.getBoundingClientRect();
-			
-				const presentation = document.querySelector("#presentation");
-				presentation.remove();
-			
-				const contact = document.querySelector("#contact");
-				contact.remove();
-			
-				const repos = document.querySelector("#repos");
-				repos.remove();
 			
 				new jOS({
 					background: "assets/background.jpg",
 					windows: [new Window({
 						icon: "assets/about.png",
 						title: "A Propos",
-						content: presentation,
+						content: getDetachedNodeById("presentation"),
 						maximizable: false,
 						resizable: false,
 						classes: ["glass"],
@@ -133,7 +169,7 @@
 					}), new Window({
 						icon: "assets/contacts.png",
 						title: "Contacts",
-						content: contact,
+						content: getDetachedNodeById("contact"),
 						maximizable: true,
 						classes: ["glass"],
 						x: bodySize.right - (bodySize.width / 5) - (bodySize.width * 0.025),
@@ -143,13 +179,23 @@
 					}), new Window({
 						icon: "assets/toolbox.png",
 						title: "Projets",
-						content: repos,
+						content: getDetachedNodeById("repos"),
 						maximizable: true,
 						classes: ["glass"],
 						x: bodySize.width * 0.025,
 						y: bodySize.width * 0.025,
 						width: (bodySize.width / 3) - (bodySize.width * 0.05),
 						height: bodySize.height - (bodySize.width * 0.05),
+					}), new Window({
+						icon: "assets/chart.png",
+						title: "Compétences",
+						content: getDetachedNodeById("stats"),
+						maximizable: true,
+						classes: ["glass"],
+						x: (bodySize.width * 0.975) - (bodySize.width / 3.75),
+						y: bodySize.width * 0.025,
+						width: (bodySize.width / 3.75),
+						height: (bodySize.height / 2)
 					})]
 				});
 			});
@@ -191,6 +237,19 @@
 				<a class="link" target="_blank"><h2 class="title"></h2></a>
 				<span class="description"></span>
 			</div>
+		</section>
+		
+		<section id="stats">
+			<div class="bar" style="--chart-value: 100;"><span>UML :</span></div>
+			<div class="bar" style="--chart-value: 100;"><span>Java :</span></div>
+			<div class="bar" style="--chart-value: 90;"><span>Javascript :</span></div>
+			<div class="bar" style="--chart-value: 90;"><span>SQL :</span></div>
+			<div class="bar" style="--chart-value: 80;"><span>C/C++ :</span></div>
+			<div class="bar" style="--chart-value: 80;"><span>HTML/CSS :</span></div>
+			<div class="bar" style="--chart-value: 75;"><span>XML :</span></div>
+			<div class="bar" style="--chart-value: 66;"><span>PHP :</span></div>
+			<div class="bar" style="--chart-value: 50;"><span>C# :</span></div>
+			<div class="bar" style="--chart-value: 33;"><span>Python :</span></div>
 		</section>
 	</body>
 </html>
