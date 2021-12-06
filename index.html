@@ -30,7 +30,7 @@
 				--primary-color: #9555ee;
 			}
 			
-			.primary-text
+			a, .primary-text
 			{
 				color: var(--primary-color);
 			}
@@ -43,6 +43,25 @@
 			h1
 			{
 				text-align: center;
+			}
+			
+			.contact-list
+			{
+				list-style-type: none;
+				padding-left: 5%;
+			}
+			
+			.contact-list > li
+			{
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+			}
+			
+			.contact-list > li > img
+			{
+				height: 1.25em;
+				margin-left: 0.5em;
 			}
 		</style>
 		
@@ -60,9 +79,12 @@
 				let presentation = document.querySelector("#presentation");
 				presentation.remove();
 			
+				let contact = document.querySelector("#contact");
+				contact.remove();
+			
 				new jOS({
 					windows: [new Window({
-						icon: "jelly.png",
+						icon: "assets/about.png",
 						title: "A Propos",
 						content: presentation,
 						maximizable: false,
@@ -72,6 +94,16 @@
 						y: (bodySize.height / 2) - (bodySize.height / 6),
 						width: bodySize.width / 3,
 						height: bodySize.height / 3
+					}), new Window({
+						icon: "assets/contacts.png",
+						title: "Contacts",
+						content: contact,
+						maximizable: true,
+						classes: ["glass"],
+						x: bodySize.right - (bodySize.width / 5) - (bodySize.width * 0.025),
+						y: bodySize.bottom - (bodySize.width / 8) - (bodySize.width * 0.025),
+						width: (bodySize.width / 5),
+						height: (bodySize.width / 8)
 					})]
 				});
 			});
@@ -80,9 +112,32 @@
 	<body style="background: url(https://cdn.dribbble.com/users/1040798/screenshots/15632395/media/da6d306e34b453b1198f069a725fc91d.png); background-size: cover; width: 100vw; height: 100vh;">
 		<main id="presentation" style="width: 100%; height: 100%; display: flex; margin: auto;">
 			<h1>
-				Bonjour, je suis <span class="primary-text">Louis Parent.</span><br/>
+				Bonjour, je suis <span class="primary-text">Louis Parent</span>.<br/>
 				J'étudie la conception et le développement. 
 			</h1>
 		</main>
+		
+		<aside id="contact">
+			<h2 style="margin-left: 5%;">Mes Contacts :</h2>
+			<ul class="contact-list">
+				<li class="mail">
+					<img src="assets/mail.png" alt="mail icon"/>
+					<span>Mail : </span>
+					<a href="mailto:contact@louis-parent.fr">contact@louis-parent.fr</a>
+				</li>
+				
+				<li class="github">
+					<img src="assets/github.png" alt="github icon"/>
+					<span>Github : </span> 
+					<a href="https://github.com/louis-parent">louis-parent</a>
+				</li>
+				
+				<li class="linkedin">
+					<img src="assets/linkedin.png" alt="linkedin icon"/>
+					<span>LinkedIn : </span>
+					<a href="https://www.linkedin.com/in/louis-parent/">louis-parent</a>
+				</li>
+			</ul>
+		</aside>	
 	</body>
 </html>
